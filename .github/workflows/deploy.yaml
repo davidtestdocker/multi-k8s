@@ -26,7 +26,7 @@ jobs:
           credentials_json: ${{ secrets.GKE_SA_KEY }}
 
       - name: Set Project
-        uses: google-github-actions/setup-gcloud@v0
+        uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: k8stest-478013
 
@@ -35,4 +35,27 @@ jobs:
           gcloud --version
           gcloud auth list
           gcloud config get-value project
+
+      - name: Auth
+        run: |-
+          gcloud --quiet auth configure-docker
+
+      - name: Get Credentials
+        uses: google-github-actions/get-gke-credentials@v0
+        with:
+          cluster_name: k8stest
+          location: asia-east1
+
+      - name: Build
+        run: |-
+          docker build \
+          -t asia-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-client-gh:latest \
+          -t asia-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-client-gh:${{ env.SHA }} \
+          -f ./client/Dockerfile \
+          ./client 
+
+      - name: Push
+        run: |-
+          docker push asia-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-client-gh:latest
+          docker push asia-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-client-gh:${{ env.SHA }}     
 

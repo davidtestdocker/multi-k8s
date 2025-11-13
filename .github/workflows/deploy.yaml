@@ -35,6 +35,7 @@ jobs:
           gcloud --version
           gcloud auth list
           gcloud config get-value project
+          gcloud artifacts repositories list --project=k8stest-478013
 
       - name: Auth
         run: |-

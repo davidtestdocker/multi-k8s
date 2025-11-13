@@ -38,7 +38,7 @@ jobs:
 
       - name: Auth
         run: |-
-          gcloud --quiet auth configure-docker
+          gcloud --quiet auth configure-docker asia-docker.pkg.dev
 
       - name: Get Credentials
         uses: google-github-actions/get-gke-credentials@v0
@@ -58,4 +58,5 @@ jobs:
         run: |-
           docker push asia-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-client-gh:latest
           docker push asia-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-client-gh:${{ env.SHA }}     
+
 

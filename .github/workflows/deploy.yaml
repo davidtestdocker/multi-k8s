@@ -49,22 +49,24 @@ jobs:
           location: asia-east1
 
       - name: Build
-        run: |-
+        run: |
           docker build \
-          -t asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-client-gh:latest \
-          -t asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-client-gh:${{ env.SHA }} \
-          -f ./client/Dockerfile \
-          ./client
+            -t asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-client-gh:latest \
+            -t asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-client-gh:${{ env.SHA }} \
+            -f ./client/Dockerfile \
+            ./client
+
           docker build \
-          -t asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-server-gh:latest \
-          -t asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-server-gh:${{ env.SHA }} \
-          -f ./server/Dockerfile \       
-          ./server
+            -t asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-server-gh:latest \
+            -t asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-server-gh:${{ env.SHA }} \
+            -f ./server/Dockerfile \
+            ./server
+
           docker build \
-          -t asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-worker-gh:latest \
-          -t asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-worker-gh:${{ env.SHA }} \
-          -f ./worker/Dockerfile \
-          ./worker
+            -t asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-worker-gh:latest \
+            -t asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-worker-gh:${{ env.SHA }} \
+            -f ./worker/Dockerfile \
+            ./worker
 
       - name: Push
         run: |-

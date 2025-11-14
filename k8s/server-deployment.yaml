@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: z82615566/multi-server-gh
+          image: asia-east1-docker.pkg.dev/k8stest-478013/multik8s-repo/multi-server-gh
           ports:
             - containerPort: 5000
           env:
